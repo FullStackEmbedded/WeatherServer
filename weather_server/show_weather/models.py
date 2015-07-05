@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 WeatherServer
 Copyright (C) 2015  Full Stack Embedded
