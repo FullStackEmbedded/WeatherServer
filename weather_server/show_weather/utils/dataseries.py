@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 rng = pd.date_range('1/1/2014', '1/1/2015', freq='H')
 frame = pd.DataFrame(index=rng)
