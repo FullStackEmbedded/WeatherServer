@@ -16,3 +16,46 @@ The members of Full Stack Embedded 2016 are, in alphabetical order:
 
 This component was authored mainly by [Daniel Lee](erget2005@gmail.com) and 
 [Gregor Schnee](schneegor@gmail.com).
+
+## Using test data
+Test data is currently a hack because currently no actual data can enter the 
+database - the weather station hardware does not exist yet. This section will
+be removed in the future.
+
+Test data can be created by executing
+``show_weather/utils/create_mock_dataseries.py``. This creates a file, 
+``data_series.csv``, in the current working directory:
+
+```
+me@host:~/WeatherServer/weather_server/show_weather/utils/> python3 create_mock_dataseries.py
+```
+
+This generates a randomized series of observations, stored as a CSV in 
+``weather_server/show_weather/utils``. You can load this into the database 
+using ``weather_server/show_weather/utils/import_generated_series.py``. This 
+is slightly complicated because it uses Django's ORM, so it has to either be 
+started inside a Django shell, which takes care of all the bookkeeping 
+legwork for you (establishing DB connection, etc.) or you have to do Django's
+administrative work for it. This example reduces the workload by using a 
+Django shell, but it's a bit esoteric for the same reason - the Django shell 
+is started, then the script is loaded as a string and executed inside that 
+environment. Don't worry, I washed my hands after writing it and it will soon
+die.
+
+``weather_server/show_weather/utils/import_generated_series.py`` creates an 
+observing station and saves all of the observations as belonging to that 
+station. It also expects the sample data series to be stored inside the 
+``utils`` folder.
+
+```
+me@host:~/WeatherServer/weather_server> python3 manage.py shell
+Python 3.4.1 (default, May 23 2014, 17:48:28) [GCC] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> with open("show_weather/utils/import_generated_series.py") as script:
+...     exec(script.read())
+```
+
+Lots of warnings follow because the ``datetime`` object used is timezone 
+naive. Now your database is full of observations for my apartment, at the 
+intersection of Constitution Hill, The Mall and Birdcage Walk.
