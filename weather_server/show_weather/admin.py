@@ -20,4 +20,22 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 from django.contrib import admin
 
-# Register your models here.
+from .models import Station, Observation
+
+class StationAdmin(admin.ModelAdmin):
+    list_display = ("name", "longitude", "latitude", "elevation", "description")
+
+class ObservationAdmin(admin.ModelAdmin):
+    list_display = ("obs_date",
+                    "station",
+                    "temperature",
+                    "relative_humidity",
+                    "precipitation",
+                    "wind_speed",
+                    "wind_direction",
+                    "pressure")
+    list_filter = ["obs_date"]
+
+for model, administrator in ((Station, StationAdmin),
+                             (Observation, ObservationAdmin)):
+    admin.site.register(model, administrator)

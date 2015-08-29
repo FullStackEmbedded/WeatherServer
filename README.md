@@ -22,6 +22,7 @@ Test data is currently a hack because currently no actual data can enter the
 database - the weather station hardware does not exist yet. This section will
 be removed in the future.
 
+### Creating and importing test data
 Test data can be created by executing
 ``show_weather/utils/create_mock_dataseries.py``. This creates a file, 
 ``data_series.csv``, in the current working directory:
@@ -59,3 +60,22 @@ Type "help", "copyright", "credits" or "license" for more information.
 Lots of warnings follow because the ``datetime`` object used is timezone 
 naive. Now your database is full of observations for my apartment, at the 
 intersection of Constitution Hill, The Mall and Birdcage Walk.
+
+### Examining test data
+If you haven't done so already, you'll need to set up your Django application.
+Set up the tables in your database and a super user so that you can use the 
+admin page as follows:
+
+
+```
+me@host:~/WeatherServer/weather_server> # Setup database
+me@host:~/WeatherServer/weather_server> python3 manage.py makemigrations
+me@host:~/WeatherServer/weather_server> python3 manage.py migrate
+me@host:~/WeatherServer/weather_server> # Setup super user - follow prompts
+me@host:~/WeatherServer/weather_server> python3 manage.py createsuperuser
+me@host:~/WeatherServer/weather_server> python3 manage.py runserver
+```
+
+Now your development server is running. If you navigate to 
+``localhost:8000/admin/`` you can login to the admin page and see the entries
+ in your database.

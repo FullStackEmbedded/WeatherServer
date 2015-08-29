@@ -21,7 +21,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 from django.db import models
 
 
-# TODO: tostring methods, also for obs
 class Station(models.Model):
     """Metadata for the observing station."""
     #: Unique station identifier
@@ -41,6 +40,9 @@ class Station(models.Model):
                                        blank=True,
                                        null=True)
     description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
 
 class Observation(models.Model):
