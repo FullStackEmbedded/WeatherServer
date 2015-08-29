@@ -78,4 +78,13 @@ me@host:~/WeatherServer/weather_server> python3 manage.py runserver
 
 Now your development server is running. If you navigate to 
 ``localhost:8000/admin/`` you can login to the admin page and see the entries
- in your database.
+in your database.
+
+## API for viewing data
+Currently, only CSVs are served as raw data. The following endpoints are 
+supported:
+
+* ``/data/csv/stations/`` - return a CSV of known station metadata
+* ``/data/csv/$station_id/$start_date - $end_date`` - return a CSV of 
+observations made at the station with ``$station_id`` between the dates 
+(inclusively) specified. Dates are to be formated as ``YYYY-MM-DD HH:MM``.

@@ -22,6 +22,12 @@ from django.contrib import admin
 from show_weather.views import index, csv_observation_request, csv_stations
 
 data_patterns = [
+    url(r'^csv/'
+        r'([0-9]+)/'                                         # Station ID
+        r'([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2})'    # Start date
+        r' - '
+        r'([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2})$',  # End date
+        csv_observation_request),
     url(r'^csv/stations/$', csv_stations)
 ]
 
