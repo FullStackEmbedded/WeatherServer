@@ -18,11 +18,17 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
 
+from csv import writer
+from io import StringIO
+
 from django.http import HttpResponse
 from django.template import Context
 from django.template.loader import get_template
 
+from .models import Station
+
 def index(request):
+    """Show index page."""
     template = get_template("index.html")
     variables = Context({
         "head_title": "Open Weather Station",
@@ -32,3 +38,18 @@ def index(request):
     })
     output = template.render(variables)
     return HttpResponse(output)
+
+def csv_stations(request):
+    """Return CSV of available stations."""
+    response = StringIO()
+    response.write("name,id,longitude,latitude,elevation,activated,deactivated,"
+                   "description\r\n")
+    csv_renderer = writer(response)
+    csv_renderer.writerows(
+        ((station.name, station.station_id, station.longitude,
+          station.latitude, station.elevation, station.activated,
+          station.deactivated, station.description))
+        for station in Station.objects.all())
+    response.seek(0)
+    return HttpResponse(response)
+

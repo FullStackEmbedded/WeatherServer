@@ -19,9 +19,14 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from show_weather.views import index
+from show_weather.views import index, csv_observation_request, csv_stations
+
+data_patterns = [
+    url(r'^csv/stations/$', csv_stations)
+]
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', index)
+    url(r'^$', index),
+    url(r'^data/', include(data_patterns))
 ]
