@@ -1,0 +1,19 @@
+#!/bin/bash
+if apt-get < /dev/null > /dev/null 2>&1 ; then
+  echo Using apt-get for packages
+  sudo apt-get install python3 python3-pip
+else
+  function verify_pkg(){
+    if $1 < /dev/null > /dev/null 2>&1 ; then
+      echo $1 found.
+    else
+      echo Please install $1 \(package $2\)
+      exit 1
+    fi
+  }
+  verify_pkg python3 python3
+  verify_pkg pip3 python3-pip
+fi
+echo **************** Running setup.py
+sudo python3 setup.py build 2> WarningsAndErrors
+echo See file WarningsAndErrors for results

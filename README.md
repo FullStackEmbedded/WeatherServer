@@ -10,12 +10,34 @@ The members of Full Stack Embedded 2016 are, in alphabetical order:
 
 * Frederic Afadjigla
 * Nico Caspari
+* William Herndon
 * Daniel Lee
-* Rüdiger Reiter
+* Ruediger Reiter
 * Gregor Schnee
 
 This component was authored mainly by [Daniel Lee](erget2005@gmail.com) and 
 [Gregor Schnee](schneegor@gmail.com).
+
+## Required/suggested packages apt-get packages
+Use "sudo apt-get install <package-name>[, <package-name>]"
+### Required:
+* python3
+* python3-pip (required for setup.py to run)
+
+## Suggested for development setup:
+* apache2
+* libapache2-mod-python
+* mysql-server
+* python3-pandas
+
+## Suggested packages pip packages
+### Use "sudo pip3 install <package-name>[, <package-name>]":
+* Django
+* MySQL-python ?
+
+## Required setup
+sudo python3 setup.py install
+
 
 ## Using test data
 Test data is currently a hack because currently no actual data can enter the 
