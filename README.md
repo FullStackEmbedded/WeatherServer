@@ -22,6 +22,17 @@ development environment. If you are wanting to deploy the weather app in a
 production environment, we suggest you read the [Django documentation for
 deploying apps](https://docs.djangoproject.com/en/1.8/howto/deployment/).
 
+For a quick minimal setup without worrying about the dependencies yourself,
+run:
+
+```
+sudo ./configure
+```
+
+from the repository's root directory. Be warned, however, that this will
+install all dependencies and install the app *systemwide* on your machine. If
+you do this, you can skip all following steps in the tutorial.
+
 ### Dependencies
 The following dependencies must be installed (e.g. with ``apt-get`` or
 ``zypper``:
